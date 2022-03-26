@@ -1,16 +1,15 @@
-### Hi there 👋
+Hi, im Shinzef
 
-<!--
-**Shinzef/Shinzef** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Im currently learning C++. :pencil2:
 
-Here are some ideas to get you started:
+I also know other languages such as HTML and CSS. 
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+**Currently doing:**
+* Learning C++
+* Attending CS50x
+* School
+* And a bunch more useless stuff.
+
+Cya soon.
+
+Also, my email, why not: lompattambang@gmail.com
