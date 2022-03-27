@@ -1,8 +1,8 @@
-Hi, im Shinzef
+**Hi, im Shinzef**
 
 Im currently learning C++. :pencil2:
 
-I also know other languages such as HTML and CSS. 
+I also know other languages such as HTML and CSS and also im a halfway decent 3d modeller.
 
 **Currently doing:**
 * Learning C++
@@ -13,3 +13,5 @@ I also know other languages such as HTML and CSS.
 Cya soon.
 
 Also, my email, why not: lompattambang@gmail.com
+
+
