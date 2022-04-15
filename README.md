@@ -14,6 +14,7 @@
 <li>Learn Phyton</li>
 <li>Become a full-stack developer.</li>
 <li>Stop doing useless stuff.</li>
+<li>Learn more cpp and ignore other lanuages</li>
 </ul>
 <p>Cya soon.</p>
 <p>Also, my email, why not: <a href="mailto:lompattambang@gmail.com">lompattambang@gmail.com</a></p>
