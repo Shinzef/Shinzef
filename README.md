@@ -1,3 +1,4 @@
+![](https://github.com/Shinzef/Shinzef/blob/main/logo.gif)
 <p align="center"><strong>Hi, im Shinzef</strong></p>
 <hr />
 <p>Im currently learning C++ and Machine Learning. :pencil2:</p>
