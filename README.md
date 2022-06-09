@@ -6,14 +6,13 @@
 <p><strong>Currently doing:</strong></p>
 <ul>
 <li>Learning C++</li>
-<li>Tensorflow</li>
+<li>Learning JavaScript</li>
 <li>School</li>
 <li>And a bunch more useless stuff.</li>
 </ul>
 <p><strong>Plan to do:</strong></p>
 <ul>
 <li>Learn Java</li>
-<li>Become a full-stack developer.</li>
 <li>Stop doing useless stuff.</li>
 <li>Learn more CPP and ignore other languages</li>
 </ul>
