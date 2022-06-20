@@ -6,6 +6,7 @@
 <p><strong>Currently doing:</strong></p>
 <ul>
 <li>Learning C++</li>
+<li>Learning QT</li>
 <li>Learning JavaScript</li>
 <li>School</li>
 <li>And a bunch more useless stuff.</li>
