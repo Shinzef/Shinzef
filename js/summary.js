@@ -450,18 +450,19 @@ function setupRandomContentHandlers(tabId) {
 
 // Google Sheets integration
 
-async function sendSecureMessage(user, message) {
+async function sendToGoogleSheets(user, message) {
     const payload = {
+        token: "EK8lYA5boKtzuiqD2e", // Your existing token
         user: user,
         message: message
     };
 
-    // Call your Netlify Function's endpoint
-    const response = await fetch("/.netlify/functions/send-message", { 
+    const response = await fetch("https://script.google.com/macros/s/AKfycbzEo6RoelzXRA3ZSaljGW2grSfZqkVz-uxO6_-9ph_LAAjPcFcLFtlLro_XWBvgMcKIzw/exec", {
+        redirect: "follow", // This is the key to avoiding CORS issues!
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "text/plain;charset=utf-8",
         },
     });
 
