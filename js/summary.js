@@ -452,7 +452,7 @@ function setupRandomContentHandlers(tabId) {
 
 async function sendToGoogleSheets(user, message) {
     const payload = {
-        token: "EK8lYA5boKtzuiqD2e", // Your existing token
+        token: process.env.SECRET_TOKEN, // Your existing token
         user: user,
         message: message
     };
