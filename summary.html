@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rhye // summary</title>
+    <link rel="stylesheet" href="assets/summary-style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+</head>
+
+<body data-theme="light">
+    <div class="page-container">
+        <!-- Background mesh -->
+        <div class="bg-mesh"></div>
+        <div class="bg-noise"></div>
+
+        <!-- Browser Window -->
+        <div class="browser-window">
+            <!-- Browser Header -->
+            <div class="browser-header">
+                <div class="window-controls">
+                    <div class="control-dot close"></div>
+                    <div class="control-dot minimize"></div>
+                    <div class="control-dot maximize"></div>
+                </div>
+                <div class="address-bar">
+                    <div class="url-container">
+                        <i class='bx bx-lock-alt'></i>
+                        <span class="url">rhye.dev/about</span>
+                    </div>
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <i class='bx bxs-moon'></i>
+                    </button>
+                </div>
+                <div class="browser-actions">
+                    <a href="new-site-rooms.html" class="nav-btn" title="Explore rooms" aria-label="Navigate to rooms page">
+                        <i class='bx bx-expand'></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <div class="tab active permanent" data-tab="about">
+                    <span>About</span>
+                </div>
+                <div class="tab permanent" data-tab="likes">
+                    <span>Likes • Dislikes</span>
+                </div>
+                <div class="tab permanent" data-tab="journal">
+                    <span>Journal</span>
+                </div>
+                <div class="tab permanent" data-tab="links">
+                    <span>Links</span>
+                </div>
+                <div class="tab permanent" data-tab="albums">
+                    <span>reccomended albums</span>
+                </div>
+                <button class="tab-add" aria-label="Add new tab" title="Add new tab">
+                    <i class='bx bx-plus'></i>
+                </button>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="browser-content">
+                <!-- Sidebar Profile -->
+                <div class="sidebar-profile">
+                    <div class="profile-image">
+                        <div class="avatar">R</div>
+                        <div class="status-dot"></div>
+                    </div>
+                    <h1 class="name">rhye</h1>
+                    <div class="handle">@shinzef</div>
+                    <p class="title">helloo! and welcome</p>
+
+                    <div class="profile-meta">
+                        <div class="meta-item">
+                            <span class="meta-key">pronouns</span>
+                            <span class="meta-value">he/him</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-key">year</span>
+                            <span class="meta-value">first year</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-key">location</span>
+                            <span class="meta-value">somewhere in earth</span>
+                        </div>
+                    </div>
+
+                    <div class="vibe-check">
+                        <span class="vibe-label">current vibe:</span>
+                        <span class="vibe-emoji">🌙</span>
+                        <span class="vibe-text">ewan, sdhshd</span>
+                    </div>
+                    
+                    <div class="message-hint">
+                        <div class="hint-icon">💌</div>
+                        <div class="hint-text">
+                            <span class="hint-label">send me a message</span>
+                            <span class="hint-desc">click the + button to add a new tab and share your thoughts</span>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Card Content (Right Side) -->
+            <div class="card-content">
+                <!-- Tab Content Container -->
+                <div class="tab-content-area">
+                    <!-- About Tab -->
+                    <div class="tab-content active" id="about-content">
+                        <div class="content-header">
+                            <span class="file-path">About</span>
+                            <div class="file-actions">
+                                <span class="line-numbers">updated recently</span>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <div class="markdown-block">
+                                <div class="code-header">
+                                    <span class="file-type">About</span>
+                                    <div class="code-actions">
+                                        <button class="code-btn" title="Copy"><i class='bx bx-copy'></i></button>
+                                    </div>
+                                </div>
+                                <div class="code-content">
+                                    <p>Hi, I’m Rhye known as shinzef — a current undergraduate student who likes making small, thoughtful things on the internet. I chase warm pixels, honest words, and ideas that feel simple but alive.</p>
+                                    <p>Programming things aside, i enjoy listening to albums, sim racing and random photography stuffs</p>
+                                    <p>Most nights you’ll find me online, especially in discord if you have anything to say don’t be afraid to reach out!</p>
+                                    
+                                    <div class="about-extras">
+                                        <div class="hobbies">
+                                            <h4 class="section-label">little joys lately</h4>
+                                            <div class="hobbies-grid">
+                                                <div class="hobby-chip" title="late night photos">📷 photography</div>
+                                                <div class="hobby-chip" title="sim racing">🏎️ sim racing</div>
+                                                <div class="hobby-chip" title="journaling">📝 journaling</div>
+                                                <div class="hobby-chip" title="sound design">🎧 album listening</div>
+                                                <div class="hobby-chip" title="reading">📚 reading</div>
+                                                <div class="hobby-chip" title="movie-watching">🎬 movie watching</div>
+                                                <div class="hobby-chip" title="coffee walks">☕ coffee</div>
+                                                <div class="hobby-chip" title="running">🏃 running</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="music">
+                                            <h4 class="section-label">on repeat</h4>
+                                            <div class="music-card" data-playing="false">
+                                                <div class="cover" aria-hidden="true">
+                                                    <img src="assets/album-cover.jpeg" alt="Album Cover" class="cover">
+                                                </div>
+                                                <div class="track">
+                                                    <div class="title">All At Once</div>
+                                                    <div class="artist">Ninajirachi</div>
+                                                </div>
+                                                <div class="controls">
+                                                    <button class="skip prev" aria-label="Previous"><i class='bx bx-skip-previous'></i></button>
+                                                    <button class="play" aria-label="Play/Pause"><i class='bx bx-play'></i></button>
+                                                    <button class="skip next" aria-label="Next"><i class='bx bx-skip-next'></i></button>
+                                                </div>
+                                                <div class="progress">
+                                                    <div class="bar"><span class="dot"></span></div>
+                                                    <div class="time"><span class="current">0:00</span><span class="total">5:27</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Likes • Dislikes (merged) -->
+                    <div class="tab-content" id="likes-content">
+                        <div class="content-header">
+                            <span class="file-path">Likes • Dislikes</span>
+                            <div class="file-actions">
+                                <span class="line-numbers">what vibes / what doesn’t</span>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <div class="markdown-block">
+                                <div class="code-header">
+                                    <span class="file-type">Preferences</span>
+                                </div>
+                                <div class="code-content">
+                                    <div class="likes-dislikes">
+                                        <div class="likes-col">
+                                            <h3>Likes</h3>
+                                            <ul>
+                                                <li>late night photography sessions</li>
+                                                <li>rain on windows while coding</li>
+                                                <li>empty coffee shops</li>
+                                                <li>film grain on digital photos</li>
+                                                <li>seamless albums</li>
+                                                <li>mechanical keyboard clicks</li>
+                                                <li>messy but organized system</li>
+                                                <li>visual aesthetics</li>
+                                                <li>deep conversations</li>
+                                            </ul>
+                                        </div>
+                                        <div class="dislikes-col">
+                                            <h3>Dislikes</h3>
+                                            <ul>
+                                                <li>slow wifi</li>
+                                                <li>crowded places</li>
+                                                <li>small talk</li>
+                                                <li>bright lights in the morning</li>
+                                                <li>auto-playing videos</li>
+                                                <li>notifications during focus time</li>
+                                                <li>very hot weather</li>
+                                            </ul>
+                                            <blockquote>less noise, more intention</blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Journal Tab → Currently -->
+                    <div class="tab-content" id="journal-content">
+                        <div class="content-header">
+                            <span class="file-path">Currently</span>
+                            <div class="file-actions">
+                                <span class="line-numbers">what I'm into right now</span>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <div class="markdown-block">
+                                <div class="code-header">
+                                    <span class="file-type">Currently</span>
+                                </div>
+                                <div class="code-content">
+                                    <ul class="currently-list">
+                                        <li><strong>Reading:</strong> East of Eden — John Steinbeck</li>
+                                        <li><strong>Playing:</strong> God of War Ragnarok</li>
+                                        <li><strong>Watching:</strong> Studio Ghibli comfort rewatch</li>
+                                        <li><strong>Learning:</strong> Acads stuff, lock in?</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Links Tab (renamed from Connect) -->
+                    <div class="tab-content" id="links-content">
+                        <div class="content-header">
+                            <span class="file-path">Links</span>
+                            <div class="file-actions">
+                                <span class="line-numbers">find me around the internet</span>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <div class="links-grid">
+                                <a href="mailto:rhyemaano@gmail.com" class="social-link">
+                                    <div class="link-icon">
+                                        <i class='bx bxs-envelope'></i>
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">email</span>
+                                        <span class="link-desc">for business inquiries</span>
+                                    </div>
+                                </a>
+                                <a href="https://github.com/shinzef" class="social-link">
+                                    <div class="link-icon">
+                                        <i class='bx bxl-github'></i>
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">github</span>
+                                        <span class="link-desc">some of my portfolio</span>
+                                    </div>
+                                </a>
+                                <a href="https://instagram.com/shinnzef" class="social-link">
+                                    <div class="link-icon">
+                                        <i class='bx bxl-instagram-alt'></i>
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">instagram</span>
+                                        <span class="link-desc">random stuffs, photos, etc.</span>
+                                    </div>
+                                </a>
+                                <a onclick="showDiscordPopup()" class="social-link">
+                                    <div class="link-icon">
+                                        <i class='bx bxl-discord-alt'></i>
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">discord</span>
+                                        <span class="link-desc">almost always online here</span>
+                                    </div>
+                                </a>
+                                <a href="https://open.spotify.com/user/lblu0rukb9f8dtsessvyz36zq" class="social-link">
+                                    <div class="link-icon">
+                                        <i class='bx bxl-spotify'></i>
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">spotify</span>
+                                        <span class="link-desc">my playlistsss!</span>
+                                    </div>
+                                </a>
+                                <a href="https://last.fm/user/shinzef" class="social-link">
+                                    <div class="link-icon">
+                                        <i class='bx bxs-music'></i>
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">last.fm</span>
+                                        <span class="link-desc">music tracking</span>
+                                    </div>
+                                </a>
+                                <a href="https://music.apple.com/profile/shinzef" class="social-link">
+                                    <div class="link-icon">
+                                        <i class='bxl bx-apple-music'></i>
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">Apple Music</span>
+                                        <span class="link-desc">my main music platformm</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Albums Tab -->
+                    <div class="tab-content" id="albums-content">
+                        <div class="content-header">
+                            <span class="file-path">reccomended albums</span>
+                            <div class="file-actions">
+                                <span class="line-numbers">six picks I like</span>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <div class="links-grid">
+                                <a href="#" class="social-link">
+                                    <div class="link-icon album-cover">
+                                        <img src="assets/album-covers/ab67616d00001e024bedbd0c514bdefa5fbfc335.jpeg" alt="Malcolm Todd (Still) album cover" />
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">Malcolm Todd (Still)</span>
+                                        <span class="link-desc">Malcolm Todd</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="social-link">
+                                    <div class="link-icon album-cover">
+                                        <img src="assets/album-covers/Every_letter_I_sent_you_Album_Cover.jpeg" alt="Every letter i sent you. album cover" />
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">Every letter i sent you.</span>
+                                        <span class="link-desc">Yerin Baek</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="social-link">
+                                    <div class="link-icon album-cover">
+                                        <img src="assets/album-covers/afterthemagic.jpeg" alt="After the magic album cover" />
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">After the magic</span>
+                                        <span class="link-desc">Parannoul</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="social-link">
+                                    <div class="link-icon album-cover">
+                                        <img src="assets/album-covers/Quadeca_Vanisher,_Horizon_Scraper.jpeg" alt="Vanisher, Horizon Scraper cover" />
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">Vanisher, Horizon Scraper</span>
+                                        <span class="link-desc">Quadeca</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="social-link">
+                                    <div class="link-icon album-cover">
+                                        <img src="assets/album-covers/everythingiknowaboutlove.jpeg" alt="Everything I Know About Love album cover" />
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">Everything I Know About Love</span>
+                                        <span class="link-desc">Laufey</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="social-link">
+                                    <div class="link-icon album-cover">
+                                        <img src="assets/album-covers/swimming.png" alt="Swimming cover" />
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">Swimming</span>
+                                        <span class="link-desc">Mac Miller</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Discord Popup Modal -->
+        <div id="discord-popup" class="popup-overlay">
+            <div class="popup-content">
+                <div class="popup-header">
+                    <i class='bx bxl-discord-alt'></i>
+                    <h3>Add me on Discord</h3>
+                    <button class="popup-close" onclick="hideDiscordPopup()" type="button" title="Close popup">
+                        <i class='bx bx-x'></i>
+                    </button>
+                </div>
+                <div class="popup-body">
+                    <div class="discord-username">
+                        <span class="username-label">Username:</span>
+                        <span class="username-value" id="discord-username">shin.5636</span>
+                        <button class="copy-btn" onclick="copyDiscordUsername()" title="Copy username">
+                            <i class='bx bx-copy'></i>
+                        </button>
+                    </div>
+                    <div class="discord-instructions">
+                        <p>Copy my username and send me a friend request on Discord!</p>
+                        <small>Make sure to include a message so I know you're from my website 😊</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/summary.js"></script>
+</body>
+
+</html>
