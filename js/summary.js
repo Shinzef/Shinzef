@@ -377,6 +377,7 @@ async function sendToGoogleSheets(user, message) {
     };
     
     const response = await fetch("https://script.google.com/macros/s/AKfycbzEo6RoelzXRA3ZSaljGW2grSfZqkVz-uxO6_-9ph_LAAjPcFcLFtlLro_XWBvgMcKIzw/exec", {
+        redirect: "follow",
         method: "POST",
         headers: { 
             "Content-Type": "application/json",
