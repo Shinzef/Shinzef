@@ -1,655 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>~/home</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
-            background: #0f0f0f;
-            color: #a0a0a0;
-            overflow-x: hidden;
-            cursor: none;
-            line-height: 1.6;
-        }
-
-        .cursor {
-            position: fixed;
-            width: 6px;
-            height: 6px;
-            background: #00ff00;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-            transition: all 0.1s ease;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: 300px 1fr 250px;
-            gap: 3rem;
-            min-height: 100vh;
-        }
-
-        /* Left Panel */
-        .left-panel {
-            position: sticky;
-            top: 2rem;
-            height: fit-content;
-        }
-
-        .window {
-            background: #1a1a1a;
-            border-radius: 8px;
-            border: 1px solid #333;
-            overflow: hidden;
-            margin-bottom: 1.5rem;
-        }
-
-        .window-header {
-            background: #2a2a2a;
-            padding: 0.75rem 1rem;
-            font-size: 0.8rem;
-            color: #666;
-            border-bottom: 1px solid #333;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .window-dots {
-            display: flex;
-            gap: 0.3rem;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #444;
-        }
-
-        .dot.active { background: #00ff00; }
-
-        .window-content {
-            padding: 1rem;
-            font-size: 0.85rem;
-        }
-
-        .status-line {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-family: monospace;
-        }
-
-        .status-indicator {
-            color: #00ff00;
-        }
-
-        /* Main Content */
-        .main-content {
-            padding-top: 1rem;
-        }
-
-        .content-block {
-            margin-bottom: 4rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
-
-        .content-block.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-header {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .text-content {
-            font-size: 1rem;
-            color: #ccc;
-            max-width: 600px;
-            margin-bottom: 2rem;
-        }
-
-        .text-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        /* Skills Grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .skill-item {
-            background: #1a1a1a;
-            border: 1px solid #2a2a2a;
-            border-radius: 6px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-item:hover {
-            border-color: #444;
-            transform: translateY(-2px);
-        }
-
-        .skill-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00ff00, transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .skill-item:hover::before {
-            transform: translateX(100%);
-        }
-
-        .skill-name {
-            font-size: 0.9rem;
-            color: #fff;
-            margin-bottom: 0.5rem;
-        }
-
-        .skill-desc {
-            font-size: 0.8rem;
-            color: #888;
-        }
-
-        /* Interest Pills */
-        .interests {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin: 2rem 0;
-        }
-
-        .interest-pill {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 20px;
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
-            color: #aaa;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .interest-pill:hover {
-            color: #fff;
-            border-color: #555;
-            transform: scale(1.05);
-        }
-
-        .interest-pill::before {
-            content: attr(data-emoji);
-            margin-right: 0.5rem;
-        }
-
-        /* Right Panel */
-        .right-panel {
-            position: sticky;
-            top: 2rem;
-            height: fit-content;
-        }
-
-        .terminal {
-            background: #0a0a0a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 1rem;
-            font-family: 'SF Mono', monospace;
-            font-size: 0.8rem;
-            line-height: 1.8;
-        }
-
-        .terminal-line {
-            margin-bottom: 0.5rem;
-        }
-
-        .prompt {
-            color: #00ff00;
-        }
-
-        .command {
-            color: #0099ff;
-        }
-
-        .output {
-            color: #888;
-            margin-left: 1rem;
-        }
-
-        .link {
-            color: #0099ff;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .link:hover {
-            color: #00ff00;
-            border-bottom-color: #00ff00;
-        }
-
-        /* Music Player */
-        .music-player {
-            margin-top: 1rem;
-        }
-
-        .track-info {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-            font-size: 0.8rem;
-        }
-
-        .play-button {
-            width: 16px;
-            height: 16px;
-            background: #00ff00;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.6rem;
-            color: #000;
-            cursor: pointer;
-            animation: pulse 2s infinite;
-        }
-
-        .progress-bar {
-            height: 2px;
-            background: #333;
-            border-radius: 1px;
-            overflow: hidden;
-        }
-
-        .progress {
-            height: 100%;
-            background: linear-gradient(90deg, #00ff00, #0099ff);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        /* Floating Elements */
-        .floating-char {
-            position: fixed;
-            font-family: monospace;
-            color: #222;
-            font-size: 1.5rem;
-            pointer-events: none;
-            z-index: 1;
-            animation: float 15s linear infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            
-            .left-panel,
-            .right-panel {
-                position: static;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #0f0f0f;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 2px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-    </style>
+    <title>rhye // summary</title>
+    <link rel="stylesheet" href="assets/summary-style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
 </head>
-<body>
-    <div class="cursor"></div>
-    
-    <div class="container">
-        <!-- Left Panel -->
-        <div class="left-panel">
-            <div class="window">
-                <div class="window-header">
-                    <div class="window-dots">
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot active"></div>
-                    </div>
-                    system_info.txt
+
+<body data-theme="light">
+    <div class="page-container">
+        <!-- Background mesh -->
+        <div class="bg-mesh"></div>
+        <div class="bg-noise"></div>
+
+        <!-- Browser Window -->
+        <div class="browser-window">
+            <!-- Browser Header -->
+            <div class="browser-header">
+                <div class="window-controls">
+                    <div class="control-dot close"></div>
+                    <div class="control-dot minimize"></div>
+                    <div class="control-dot maximize"></div>
                 </div>
-                <div class="window-content">
-                    <div class="status-line">
-                        <span>uptime:</span>
-                        <span class="status-indicator" id="uptime">--:--:--</span>
+                <div class="address-bar">
+                    <div class="url-container">
+                        <i class='bx bx-lock-alt'></i>
+                        <span class="url">rhye.dev/about</span>
                     </div>
-                    <div class="status-line">
-                        <span>status:</span>
-                        <span class="status-indicator">online</span>
-                    </div>
-                    <div class="status-line">
-                        <span>mood:</span>
-                        <span style="color: #888;" id="mood">focused</span>
-                    </div>
-                    <div class="status-line">
-                        <span>location:</span>
-                        <span style="color: #888;">~/desk</span>
-                    </div>
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <i class='bx bxs-moon'></i>
+                    </button>
+                </div>
+                <div class="browser-actions">
+                    <a href="new-site-rooms.html" class="nav-btn" title="Explore rooms" aria-label="Navigate to rooms page">
+                        <i class='bx bx-expand'></i>
+                    </a>
                 </div>
             </div>
 
-            <div class="window">
-                <div class="window-header">
-                    <div class="window-dots">
-                        <div class="dot"></div>
-                        <div class="dot active"></div>
-                        <div class="dot"></div>
-                    </div>
-                    now_playing.log
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <div class="tab active permanent" data-tab="about">
+                    <span>About</span>
                 </div>
-                <div class="window-content">
-                    <div class="music-player">
-                        <div class="track-info">
-                            <div class="play-button">▶</div>
-                            <span>Malcolm Todd - Original</span>
+                <div class="tab permanent" data-tab="likes">
+                    <span>Likes • Dislikes</span>
+                </div>
+                <div class="tab permanent" data-tab="journal">
+                    <span>Journal</span>
+                </div>
+                <div class="tab permanent" data-tab="links">
+                    <span>Links</span>
+                </div>
+                <button class="tab-add" aria-label="Add new tab" title="Add new tab">
+                    <i class='bx bx-plus'></i>
+                </button>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="browser-content">
+                <!-- Sidebar Profile -->
+                <div class="sidebar-profile">
+                    <div class="profile-image">
+                        <div class="avatar">R</div>
+                        <div class="status-dot"></div>
+                    </div>
+                    <h1 class="name">rhye</h1>
+                    <div class="handle">@shinzef</div>
+                    <p class="title">helloo !t</p>
+                    
+                    <div class="profile-meta">
+                        <div class="meta-item">
+                            <span class="meta-key">pronouns</span>
+                            <span class="meta-value">he/him</span>
                         </div>
-                        <div class="progress-bar">
-                            <div class="progress" id="music-progress"></div>
+                        <div class="meta-item">
+                            <span class="meta-key">year</span>
+                            <span class="meta-value">sophomore</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-key">location</span>
+                            <span class="meta-value">somewhere in earth</span>
+                        </div>
+                    </div>
+
+                    <div class="vibe-check">
+                        <span class="vibe-label">current vibe:</span>
+                        <span class="vibe-emoji">🌙</span>
+                        <span class="vibe-text">ewan, sdhshd</span>
+                    </div>
+                </div>
+
+            <!-- Card Content (Right Side) -->
+            <div class="card-content">
+                <!-- Tab Content Container -->
+                <div class="tab-content-area">
+                    <!-- About Tab -->
+                    <div class="tab-content active" id="about-content">
+                        <div class="content-header">
+                            <span class="file-path">About</span>
+                            <div class="file-actions">
+                                <span class="line-numbers">updated recently</span>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <div class="markdown-block">
+                                <div class="code-header">
+                                    <span class="file-type">About</span>
+                                    <div class="code-actions">
+                                        <button class="code-btn" title="Copy">
+                                            <i class='bx bx-copy'></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="code-content">
+                                    <p>Hi, I’m Rhye — a creative technologist who likes making small, thoughtful things on the internet. I chase warm pixels, honest words, and ideas that feel simple but alive. This space is a quiet corner for me to collect experiments, notes, and moments that feel like me.</p>
+                                    <p>Most nights you’ll find me tweaking type by 2px, taking photos when the city is asleep, or building tiny tools that make the web feel a little softer.</p>
+
+                                    <div class="about-extras">
+                                        <div class="hobbies">
+                                            <h4 class="section-label">little joys lately</h4>
+                                            <div class="hobbies-grid">
+                                                <div class="hobby-chip" title="late night photos">📷 photography</div>
+                                                <div class="hobby-chip" title="sim racing">🏎️ sim racing</div>
+                                                <div class="hobby-chip" title="journaling">📝 journaling</div>
+                                                <div class="hobby-chip" title="sound design">🎧 sound design</div>
+                                                <div class="hobby-chip" title="reading">📚 reading</div>
+                                                <div class="hobby-chip" title="coffee walks">☕ coffee walks</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="music">
+                                            <h4 class="section-label">on repeat</h4>
+                                            <div class="music-card" data-playing="false">
+                                                <div class="cover" aria-hidden="true"></div>
+                                                <div class="track">
+                                                    <div class="title">Blonde</div>
+                                                    <div class="artist">Frank Ocean</div>
+                                                </div>
+                                                <div class="controls">
+                                                    <button class="skip prev" aria-label="Previous"><i class='bx bx-skip-previous'></i></button>
+                                                    <button class="play" aria-label="Play/Pause"><i class='bx bx-play'></i></button>
+                                                    <button class="skip next" aria-label="Next"><i class='bx bx-skip-next'></i></button>
+                                                </div>
+                                                <div class="progress">
+                                                    <div class="bar"><span class="dot"></span></div>
+                                                    <div class="time"><span class="current">0:00</span><span class="total">3:12</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Likes • Dislikes (merged) -->
+                    <div class="tab-content" id="likes-content">
+                        <div class="content-header">
+                            <span class="file-path">Likes • Dislikes</span>
+                            <div class="file-actions">
+                                <span class="line-numbers">what vibes / what doesn’t</span>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <div class="markdown-block">
+                                <div class="code-header">
+                                    <span class="file-type">Preferences</span>
+                                </div>
+                                <div class="code-content">
+                                    <div class="likes-dislikes">
+                                        <div class="likes-col">
+                                            <h3>Likes</h3>
+                                            <ul>
+                                                <li>late night photography sessions</li>
+                                                <li>rain on windows while coding</li>
+                                                <li>empty coffee shops at 2am</li>
+                                                <li>film grain on digital photos</li>
+                                                <li>frank ocean’s voice cracks</li>
+                                                <li>mechanical keyboard clicks</li>
+                                                <li>perfectly organized files and colors</li>
+                                                <li>vintage computing aesthetics</li>
+                                            </ul>
+                                        </div>
+                                        <div class="dislikes-col">
+                                            <h3>Dislikes</h3>
+                                            <ul>
+                                                <li>slow wifi</li>
+                                                <li>crowded places</li>
+                                                <li>small talk</li>
+                                                <li>bright lights in the morning</li>
+                                                <li>auto-playing videos</li>
+                                                <li>notifications during focus time</li>
+                                            </ul>
+                                            <blockquote>less noise, more intention</blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Journal Tab → Currently -->
+                    <div class="tab-content" id="journal-content">
+                        <div class="content-header">
+                            <span class="file-path">Currently</span>
+                            <div class="file-actions">
+                                <span class="line-numbers">what I'm into right now</span>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <div class="markdown-block">
+                                <div class="code-header">
+                                    <span class="file-type">Currently</span>
+                                </div>
+                                <div class="code-content">
+                                    <ul class="currently-list">
+                                        <li><strong>Reading:</strong> The Creative Act — Rick Rubin</li>
+                                        <li><strong>Listening:</strong> Blonde — Frank Ocean</li>
+                                        <li><strong>Playing:</strong> God of War Ragnarok</li>
+                                        <li><strong>Watching:</strong> Studio Ghibli comfort rewatch</li>
+                                        <li><strong>Learning:</strong> Color grading basics in DaVinci Resolve</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Links Tab (renamed from Connect) -->
+                    <div class="tab-content" id="links-content">
+                        <div class="content-header">
+                            <span class="file-path">Links</span>
+                            <div class="file-actions">
+                                <span class="line-numbers">find me around the internet</span>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <div class="links-grid">
+                                <a href="mailto:rhyemaano@gmail.com" class="social-link">
+                                    <div class="link-icon">
+                                        <i class='bx bxs-envelope'></i>
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">email</span>
+                                        <span class="link-desc">for business inquiries</span>
+                                    </div>
+                                </a>
+                                <a href="https://github.com/shinzef" class="social-link">
+                                    <div class="link-icon">
+                                        <i class='bx bxl-github'></i>
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">github</span>
+                                        <span class="link-desc">some of my portfolio</span>
+                                    </div>
+                                </a>
+                                <a href="https://instagram.com/shinnzef" class="social-link">
+                                    <div class="link-icon">
+                                        <i class='bx bxl-instagram-alt'></i>
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">instagram</span>
+                                        <span class="link-desc">random stuffs, photos, etc.</span>
+                                    </div>
+                                </a>
+                                <a onclick="showDiscordPopup()" class="social-link">
+                                    <div class="link-icon">
+                                        <i class='bx bxl-discord-alt'></i>
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">discord</span>
+                                        <span class="link-desc">almost always online here</span>
+                                    </div>
+                                </a>
+                                <a href="https://open.spotify.com/user/shinzef" class="social-link">
+                                    <div class="link-icon">
+                                        <i class='bx bxl-spotify'></i>
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">spotify</span>
+                                        <span class="link-desc">my playlistsss!</span>
+                                    </div>
+                                </a>
+                                <a href="https://last.fm/user/shinzef" class="social-link">
+                                    <div class="link-icon">
+                                        <i class='bx bxs-music'></i>
+                                    </div>
+                                    <div class="link-content">
+                                        <span class="link-title">last.fm</span>
+                                        <span class="link-desc">music tracking</span>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <div class="content-block">
-                <div class="section-header">// hello_world</div>
-                <div class="text-content">
-                    <p>
-                        Im shinzef/rhye, current undergraduate student. I write code that hopefully doesn't break in production. I sometimes make apps that help me.
-                    </p>
-                    <p>
-                        Most days you'll find me sleeping, im tired always, idk why. Also maybe learning on how to integrate medicine with technology.
-                    </p>
+        <!-- Discord Popup Modal -->
+        <div id="discord-popup" class="popup-overlay">
+            <div class="popup-content">
+                <div class="popup-header">
+                    <i class='bx bxl-discord-alt'></i>
+                    <h3>Add me on Discord</h3>
+                    <button class="popup-close" onclick="hideDiscordPopup()" type="button" title="Close popup">
+                        <i class='bx bx-x'></i>
+                    </button>
                 </div>
-            </div>
-
-            <div class="content-block">
-                <div class="section-header">// stack</div>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <div class="skill-name">Frontend</div>
-                        <div class="skill-desc">React, Vue, vanilla JS, Flutter</div>
+                <div class="popup-body">
+                    <div class="discord-username">
+                        <span class="username-label">Username:</span>
+                        <span class="username-value" id="discord-username">shin.5636</span>
+                        <button class="copy-btn" onclick="copyDiscordUsername()" title="Copy username">
+                            <i class='bx bx-copy'></i>
+                        </button>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Backend</div>
-                        <div class="skill-desc">Node.js, Python, C++, occasionally Go</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Database</div>
-                        <div class="skill-desc">PostgreSQL, MongoDB, Redis, SQLite</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Tools</div>
-                        <div class="skill-desc">Docker, Git, Linux, VS Code, Notepad</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Cloud</div>
-                        <div class="skill-desc">AWS, Vercel, DigitalOcean droplets</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Currently Learning</div>
-                        <div class="skill-desc">Rust, WebAssembly, x86 Assembly, whatever's interesting</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Misc</div>
-                        <div class="skill-desc">Photoshop, Illustrator, After Effects, Blender</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="content-block">
-                <div class="section-header">// interests</div>
-                <div class="interests">
-                    <div class="interest-pill" data-emoji="📸">photography</div>
-                    <div class="interest-pill" data-emoji="🎮">indie games</div>
-                    <div class="interest-pill" data-emoji="📚">novels/books</div>
-                    <div class="interest-pill" data-emoji="🎵">music</div>
-                    <div class="interest-pill" data-emoji="☕">coffee</div>
-                    <div class="interest-pill" data-emoji="🏃‍♂️">running</div>
-                    <div class="interest-pill" data-emoji="🌱">houseplants</div>
-                    <div class="interest-pill" data-emoji="🎨">drawing</div>
-                </div>
-            </div>
-
-            <div class="content-block">
-                <div class="section-header">// thoughts</div>
-                <div class="text-content">
-                    <p>
-                        Technology should feel invisible when it works well. The best interfaces are 
-                        the ones users don't think about - they just work intuitively.
-                    </p>
-                    <p>
-                        I'm constantly amazed by how a few lines of code can solve real problems for 
-                        real people. That's the part that never gets old.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Panel -->
-        <div class="right-panel">
-            <div class="window">
-                <div class="window-header">
-                    <div class="window-dots">
-                        <div class="dot active"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                    </div>
-                    connect.sh
-                </div>
-                <div class="window-content">
-                    <div class="terminal">
-                        <div class="terminal-line">
-                            <span class="prompt">$</span> cat contacts
-                        </div>
-                        <div class="terminal-line">
-                            <span class="output">github: <a href="https://github.com/Shinzef" class="link">@Shinzef</a></span>
-                        </div>
-                        <div class="terminal-line">
-                            <span class="output">email: <a href="mailto:rhyemaano@gmail.com" class="link">rhyemaano@gmail.com</a></span>
-                        </div>
-                        <div class="terminal-line">
-                            <span class="output">Discord: <a href="https://discordapp.com/users/800868875906187284" class="link">shin.5636</a></span>
-                        </div>
-                        <div class="terminal-line">
-                            <span class="output">Telegram: <a href="https://telegram.me/Shinzef" class="link">@Shinzef</a></span>
-                        </div>
-                        <div class="terminal-line" style="margin-top: 1rem;">
-                            <span class="prompt">$</span> <span class="command">echo</span> "idk, just say hi"
-                        </div>
+                    <div class="discord-instructions">
+                        <p>Copy my username and send me a friend request on Discord!</p>
+                        <small>Make sure to include a message so I know you're from my website 😊</small>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // Cursor
-        const cursor = document.querySelector('.cursor');
-        let mouseX = 0, mouseY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        function updateCursor() {
-            cursor.style.left = mouseX - 3 + 'px';
-            cursor.style.top = mouseY - 3 + 'px';
-            requestAnimationFrame(updateCursor);
-        }
-        updateCursor();
-
-        // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.content-block').forEach(block => {
-            observer.observe(block);
-        });
-
-        // Uptime counter
-        const startTime = Date.now();
-        const uptimeElement = document.getElementById('uptime');
-        
-        function updateUptime() {
-            const elapsed = Date.now() - startTime;
-            const hours = Math.floor(elapsed / 3600000);
-            const minutes = Math.floor((elapsed % 3600000) / 60000);
-            const seconds = Math.floor((elapsed % 60000) / 1000);
-            
-            uptimeElement.textContent = 
-                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-        
-        setInterval(updateUptime, 1000);
-
-        // Music progress
-        const musicProgress = document.getElementById('music-progress');
-        let progress = 0;
-        
-        setInterval(() => {
-            progress += 0.5;
-            if (progress > 100) progress = 0;
-            musicProgress.style.width = progress + '%';
-        }, 200);
-
-        // Random mood changes
-        const moods = ['focused', 'creative', 'debugging', 'caffeinated', 'inspired', 'shipping'];
-        const moodElement = document.getElementById('mood');
-        
-        setInterval(() => {
-            const randomMood = moods[Math.floor(Math.random() * moods.length)];
-            moodElement.textContent = randomMood;
-        }, 30000);
-
-        // Floating characters
-        const chars = ['{', '}', '<', '>', '(', ')', '[', ']', ';', ':', '=', '+', '-', '*', '/', '%'];
-        
-        function createFloatingChar() {
-            const char = document.createElement('div');
-            char.className = 'floating-char';
-            char.textContent = chars[Math.floor(Math.random() * chars.length)];
-            char.style.left = Math.random() * 100 + 'vw';
-            char.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            document.body.appendChild(char);
-            
-            setTimeout(() => {
-                char.remove();
-            }, 20000);
-        }
-        
-        setInterval(createFloatingChar, 3000);
-
-        // Interest pill interactions
-        document.querySelectorAll('.interest-pill').forEach(pill => {
-            pill.addEventListener('click', () => {
-                pill.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    pill.style.transform = 'scale(1.05)';
-                    setTimeout(() => {
-                        pill.style.transform = 'scale(1)';
-                    }, 150);
-                }, 100);
-            });
-        });
-
-        // Play button interaction
-        document.querySelector('.play-button').addEventListener('click', function() {
-            this.textContent = this.textContent === '▶' ? '⏸' : '▶';
-            this.style.animation = this.textContent === '⏸' ? 'pulse 1s infinite' : 'none';
-        });
-    </script>
+    <script src="js/summary.js"></script>
 </body>
+
 </html>

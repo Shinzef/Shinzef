@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rhye // creative space</title>
+    <link rel="stylesheet" href="assets/rooms-style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/SplitText.min.js"></script>
+    <script src="https://unpkg.com/gsap@3.13.0/dist/TextPlugin.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
+</head>
+
+<body data-theme="light">
+    <div class="app-container">
+        <!-- Room Navigation -->
+        <nav class="room-navigator">
+            <div class="room-map">
+                <div class="room-dot active" data-room="0" title="intro"><i class='bx bxs-home'></i></div>
+                <div class="room-dot" data-room="1" title="about"><i class='bx bxs-user'></i></div>
+                <div class="room-dot" data-room="2" title="thoughts"><i class='bx bxs-comment-detail'></i></div>
+                <div class="room-dot" data-room="3" title="visuals">
+                    <i class='bx bxs-camera creative-icon'></i>
+                    <i class='bx bxs-terminal    tech-icon'></i>
+                </div>
+                <div class="room-dot" data-room="4" title="library"><i class='bx bxs-book'></i></div>
+                <div class="room-dot" data-room="5" title="gaming"><i class='bx bxs-joystick'></i></div>
+            </div>
+            <div class="nav-controls">
+                <div class="mode-toggle">
+                    <div class="mode-option active" data-mode="creative">creative</div>
+                    <div class="mode-option" data-mode="tech">tech</div>
+                </div>
+                <button class="theme-toggle" aria-label="Toggle theme">
+                    <span class="theme-icon"><i class='bx bxs-moon'></i></span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Social Card -->
+        <div class="social-card">
+            <div class="social-header">
+                <div class="social-title">@shinzef</div>
+                <div class="social-subtitle">let's connect</div>
+            </div>
+            <div class="social-links">
+                <a href="mailto:rhyemaano@gmail.com" class="social-link"><i class='bx bxs-envelope'></i></a>
+                <a href="https://github.com/shinzef" class="social-link"><i class='bx bxl-github'></i></a>
+                <a href="https://instagram.com/shinnzef" class="social-link"><i class='bx bxl-instagram-alt'></i></a>
+                <a onclick="showDiscordPopup()" class="social-link"><i class='bx bxl-discord-alt'></i></a>
+            </div>
+        </div>
+
+        <!-- Rooms Container -->
+        <div class="rooms-container">
+            <!-- Room 0: Hero/Intro -->
+            <div class="room hero-room">
+                <div class="hero-background">
+                    <div class="circle-blur"></div>
+                    <div class="circle-blur"></div>
+                    <div class="circle-blur"></div>
+                    <div class="hero-circles">
+                        <div class="circle-solid"></div>
+                        <div class="circle-solid"></div>
+                        <div class="circle-solid"></div>
+                        <div class="circle-solid"></div>
+                        <div class="circle-solid"></div>
+                    </div>
+                </div>
+                <div class="hero-content-wrapper">
+                    <div class="room-content">
+                        <div class="hero-intro">Currently exploring new perspectives</div>
+                        <h1 class="hero-title">Hey, I'm Rhye</h1>
+                        <p class="hero-subtitle">Creating things that make me curious. Sometimes with code, sometimes with cameras, always with intention.</p>
+                        <div class="creative-mode">
+                            <div class="hero-status">
+                                <div class="status-dot"></div>
+                                Still becoming — here's where I am right now
+                            </div>
+                        </div>
+                        <div class="tech-mode">
+                            <div class="hero-status">
+                                <div class="status-dot"></div>
+                                Available for interesting projects
+                            </div>
+                        </div>
+                        <div class="hero-nav-hint">
+                            <span>Navigate rooms with the map above ↗</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 1: About -->
+            <div class="room about-room">
+                <div class="room-content">
+                    <!-- Creative Mode Content -->
+                    <div class="creative-mode">
+                        <div class="room-header">
+                            <h2 class="room-title">What Makes Me Tick</h2>
+                            <p class="room-description">I'm drawn to the spaces between things—where technology meets art, where precision meets spontaneity.</p>
+                        </div>
+                        <div class="about-grid">
+                            <div class="about-card">
+                                <div class="card-icon"><i class='bx bxs-camera-movie'></i></div>
+                                <h3>Photography</h3>
+                                <p>There's something about capturing moments in time. I have tons of SD cards filled with memories but haven't been able to organize them all.</p>
+                            </div>
+                            <div class="about-card">
+                                <div class="card-icon"><i class='bx bxs-car'></i></div>
+                                <h3>Cars</h3>
+                                <p>There's something about the design and engineering of cars that fascinates me. And racing especially, I even own a steering wheel setup for sim racing.</p>
+                            </div>
+                            <div class="about-card">
+                                <div class="card-icon"><i class='bx bxs-cube-alt'></i></div>
+                                <h3>Building Things</h3>
+                                <p>Whether it's a website, a photo, or organizing digital files, I love creating systems that feel intentional.</p>
+                            </div>
+                            <div class="about-card">
+                                <div class="card-icon"><i class='bx bxs-music'></i></div>
+                                <h3>Music Obsessions</h3>
+                                <p>Frank Ocean's storytelling, Tyler's production choices, and the perfect song for 2am drives.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tech Mode Content -->
+                    <div class="tech-mode">
+                        <div class="room-header">
+                            <h2 class="room-title">How I Build Things</h2>
+                            <p class="room-description">The tools and technologies I use to bring ideas to life. Always learning, always curious about what's next.</p>
+                        </div>
+                        <div class="tech-grid">
+                            <div class="tech-card">
+                                <div class="tech-icon"><i class='bx bxl-react'></i></div>
+                                <h3>Frontend</h3>
+                                <div class="tech-list">
+                                    React, Vue, JavaScript/TypeScript<br>
+                                    CSS/SCSS, Tailwind<br>
+                                    Next.js, Vite<br>
+                                    Three.js for creative projects
+                                </div>
+                            </div>
+                            <div class="tech-card">
+                                <div class="tech-icon"><i class='bx bxs-server'></i></div>
+                                <h3>Backend & Tools</h3>
+                                <div class="tech-list">
+                                    Node.js, Python<br>
+                                    PostgreSQL, MongoDB<br>
+                                    Git, Docker<br>
+                                    Figma for design
+                                </div>
+                            </div>
+                            <div class="tech-card">
+                                <div class="tech-icon"><i class='bx bxs-flask'></i></div>
+                                <h3>Currently Exploring</h3>
+                                <div class="tech-list">
+                                    WebGL & creative coding<br>
+                                    AI/ML for creative projects<br>
+                                    Rust (when I'm feeling brave)<br>
+                                    Motion design principles
+                                </div>
+                            </div>
+                            <div class="tech-card">
+                                <div class="tech-icon"><i class='bx-target-lock'></i></div>
+                                <h3>My Approach</h3>
+                                <div class="tech-list">
+                                    Human-centered design<br>
+                                    Clean, maintainable code<br>
+                                    Performance & accessibility<br>
+                                    Creative problem solving
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 2: Thoughts -->
+            <div class="room thoughts-room">
+                <div class="room-content">
+                    <div class="room-header">
+                        <h2 class="room-title">Things I Can't Stop Thinking About</h2>
+                        <p class="room-description">Random obsessions that probably reveal more about me than I intended.</p>
+                    </div>
+                    <div class="thoughts-wall">
+                        <div class="thought-bubble">Empty coffee shops</div>
+                        <div class="thought-bubble">Government website aesthetics</div>
+                        <div class="thought-bubble">NASA archive photos</div>
+                        <div class="thought-bubble">The sound of film advancing</div>
+                        <div class="thought-bubble">Perfectly organized desks</div>
+                        <div class="thought-bubble">Rain on car windows</div>
+                        <div class="thought-bubble">3am convenience stores</div>
+                        <div class="thought-bubble">Frank Ocean voice cracks</div>
+                        <div class="thought-bubble">Swimming pool reflections</div>
+                        <div class="thought-bubble">Vintage computing</div>
+                        <div class="thought-bubble">Film grain texture</div>
+                        <div class="thought-bubble">Late night coding sessions</div>
+                    </div>
+                    <div class="thought-generator">
+                        <button class="generate-btn" onclick="generateThought()">Random 2am Thought</button>
+                        <p id="random-thought" class="generated-thought"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 3: Visual Stories -->
+            <div class="room visual-room">
+                <div class="room-content">
+                    <!-- Creative Mode Content -->
+                    <div class="creative-mode">
+                        <div class="room-header">
+                            <h2 class="room-title">Visual Stories</h2>
+                            <p class="room-description">Moments captured on film and in pixels. Each one tells a story I'm still figuring out.</p>
+                        </div>
+                        <div class="gallery-wall">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-caption">
+                                    <strong>Airplane Views</strong>
+                                    <small>6am reflections & solitude</small>
+                                </div>
+                            </div>
+                            <div class="photo-frame">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-caption">
+                                    <strong>City Wandering</strong>
+                                    <small>3am decisions & neon lights</small>
+                                </div>
+                            </div>
+                            <div class="photo-frame">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-caption">
+                                    <strong>Coffee Shop Chronicles</strong>
+                                    <small>Before the world wakes up</small>
+                                </div>
+                            </div>
+                            <div class="photo-frame">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-caption">
+                                    <strong>Film Experiments</strong>
+                                    <small>Happy accidents & grain</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tech Mode Content -->
+                    <div class="tech-mode">
+                        <div class="room-header">
+                            <h2 class="room-title">Projects & Code</h2>
+                            <p class="room-description">Things I've built that started as late-night ideas and somehow became real.</p>
+                        </div>
+                        <div class="projects-grid">
+                            <div class="project-card">
+                                <div class="project-icon"><i class='bx bxs-camera-movie'></i></div>
+                                <h3>Personal Archive System</h3>
+                                <p>Custom photo organization tool that categorizes my photography by mood, time of day, and emotional significance. With presets for exporting</p>
+                                <div class="tech-stack">React • TypeScript • Node.js</div>
+                            </div>
+                            <div class="project-card">
+                                <div class="project-icon"><i class='bxr bxs-earbuds'></i></div>
+                                <h3>Huawei Earbuds App</h3>
+                                <p>Crossplatform app that allows you to control huawei freebuds, with complete parity to the official app. With reversed engineered protocol</p>
+                                <div class="tech-stack">C++ • Flutter • Kotlin</div>
+                            </div>
+                            <div class="project-card">
+                                <div class="project-icon"><i class='bx bxs-music'></i></div>
+                                <h3>Minimal Music Player</h3>
+                                <p>Clean interface for carefully curated playlists. Features mood-based recommendations using machine learning algorithms and sentiment analysis.</p>
+                                <div class="tech-stack">Python • Flask • TensorFlow</div>
+                            </div>
+                            <div class="project-card">
+                                <div class="project-icon"><i class='bx bxs-magic-wand'></i></div>
+                                <h3>Creative Code Experiments</h3>
+                                <p>Interactive visual pieces made with p5.js and Three.js.</p>
+                                <div class="tech-stack">Three.js • p5.js • WebGL</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 4: Library/Reading -->
+            <div class="room library-room">
+                <div class="room-content">
+                    <div class="room-header">
+                        <h2 class="room-title">My Reading Corner</h2>
+                        <p class="room-description">What's currently living on my nightstand and in my thoughts.</p>
+                    </div>
+                    <div class="bookshelf">
+                        <div class="book-spine">
+                            <div class="book-title">The Creative Act</div>
+                            <div class="book-author">Rick Rubin</div>
+                            <div class="reading-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 65%"></div>
+                                </div>
+                                <span>65% read</span>
+                            </div>
+                        </div>
+                        <div class="book-spine">
+                            <div class="book-title">Atomic Habits</div>
+                            <div class="book-author">James Clear</div>
+                            <div class="reading-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 30%"></div>
+                                </div>
+                                <span>30% read</span>
+                            </div>
+                        </div>
+                        <div class="book-spine">
+                            <div class="book-title">Jujutsu Kaisen Vol. 15</div>
+                            <div class="book-author">Gege Akutami</div>
+                            <div class="reading-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                </div>
+                                <span>finished</span>
+                            </div>
+                        </div>
+                        <div class="book-spine next-up">
+                            <div class="book-title">Next: Design for the Real World</div>
+                            <div class="book-author">Victor Papanek</div>
+                            <div class="reading-progress">
+                                <span>up next</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reading-stats">
+                        <div class="stat">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">books this month</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">2am</div>
+                            <div class="stat-label">favorite reading time</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 5: Gaming -->
+            <div class="room gaming-room">
+                <div class="room-content">
+                    <div class="room-header">
+                        <h2 class="room-title">Gaming Corner</h2>
+                        <p class="room-description">Add me and let's play together!</p>
+                    </div>
+                    <div class="gaming-setup">
+                        <div class="game-account">
+                            <div class="platform-icon"><i class='bx bxl-steam'></i></div>
+                            <div class="account-info">
+                                <div class="platform">Steam</div>
+                                <div class="username">Shinzef</div>
+                                <!-- <div class="status">🟢 Online</div> -->
+                            </div>
+                        </div>
+                        <div class="game-account discord-account" onclick="showDiscordPopup()">
+                            <div class="platform-icon"><i class='bx bxl-discord-alt'></i></div>
+                            <div class="account-info">
+                                <div class="platform">Discord</div>
+                                <div class="username">Click to see username</div>
+                                <!-- <div class="status">🟡 Away</div> -->
+                            </div>
+                        </div>
+                        <div class="game-account">
+                            <div class="platform-icon"><i class='bx bxs-joystick-alt'></i></div>
+                            <div class="account-info">
+                                <div class="platform">Microsoft/Xbox</div>
+                                <div class="username">MC shinZ3F</div>
+                                <!-- <div class="status">🔴 Offline</div> -->
+                            </div>
+                        </div>
+                        <div class="game-account">
+                            <div class="platform-icon"><i class='bxl bx-roblox'></i></div>
+                            <div class="account-info">
+                                <div class="platform">Roblox</div>
+                                <div class="username">thekabloosh</div>
+                                <!-- <div class="status">🔴 Offline</div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="currently-playing">
+                        <h3>Currently Playing</h3>
+                        <div class="game-card">
+                            <div class="game-title">Minecraft</div>
+                            <div class="game-time">??? hours played</div>
+                        </div>
+                        <div class="game-card">
+                            <div class="game-title">Roblox</div>
+                            <div class="game-time">??? hours played</div>
+                        </div>
+                        <div class="game-card">
+                            <div class="game-title">God of War Ragnarok</div>
+                            <div class="game-time">17 hours played</div>
+                        </div>
+                        <div class="game-card">
+                            <div class="game-title">Asseto Corsa</div>
+                            <div class="game-time">??? hours played</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Discord Popup Modal -->
+    <div id="discord-popup" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-header">
+                <i class='bx bxl-discord-alt'></i>
+                <h3>Add me on Discord</h3>
+                <button class="popup-close" onclick="hideDiscordPopup()" type="button">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+            <div class="popup-body">
+                <div class="discord-username">
+                    <span class="username-label">Username:</span>
+                    <span class="username-value" id="discord-username">shin.5636</span>
+                    <button class="copy-btn" onclick="copyDiscordUsername()" title="Copy username">
+                        <i class='bx bx-copy'></i>
+                    </button>
+                </div>
+                <div class="discord-instructions">
+                    <p>Copy my username and send me a friend request on Discord!</p>
+                    <small>Make sure to include a message so I know you're from my website 😊</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/rooms.js"></script>
+    <script src="js/hero-animation.js"></script>
+</body>
+
+</html>
