@@ -604,6 +604,44 @@ body {
     line-height: 1.4;
 }
 
+/* Tech hint card */
+.tech-hint {
+    width: 100%;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+}
+
+.tech-hint .hint-icon {
+    font-size: 18px;
+    color: var(--text-accent);
+}
+
+.tech-hint .hint-label { text-transform: none; }
+
+.tech-hint .hint-cta {
+    margin-left: auto;
+    background: var(--accent-primary);
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid var(--accent-primary);
+    transition: filter var(--transition-fast), transform var(--transition-fast);
+}
+
+.tech-hint .hint-cta:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+}
+
 /* ===== TAB CONTENT AREA ===== */
 .tab-content-area {
     flex: 1;
